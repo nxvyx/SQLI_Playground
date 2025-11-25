@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1>📋 Security Logs</h1>
+        <p class="text-muted">View all security events and SQL injection attempts detected by the system.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Security Event Log</h5>
+            </div>
+            <div class="card-body">
+                {% if logs %}
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>IP Address</th>
+                                    <th>Event Type</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in logs %}
+                                    {% set log_parts = log.strip().split(' - ', 3) %}
+                                    {% if log_parts|length >= 4 %}
+                                        <tr>
+                                            <td><small>{{ log_parts[0] }} {{ log_parts[1] }}</small></td>
+                                            <td>
+                                                <span class="badge bg-info">{{ log_parts[2] }}</span>
+                                            </td>
+                                            <td>
+                                                {% set event_type = log_parts[3].split(' - ')[0] %}
+                                                {% if 'error' in event_type.lower() or 'injection' in event_type.lower() %}
+                                                    <span class="badge bg-danger">{{ event_type }}</span>
+                                                {% elif 'success' in event_type.lower() %}
+                                                    <span class="badge bg-success">{{ event_type }}</span>
+                                                {% else %}
+                                                    <span class="badge bg-secondary">{{ event_type }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <small class="text-muted">
+                                                    {% set details = log_parts[3].split(' - ', 1) %}
+                                                    {% if details|length > 1 %}
+                                                        <code class="d-inline-block" style="max-width: 500px; overflow-x: auto;">{{ details[1][:100] }}{% if details[1]|length > 100 %}...{% endif %}</code>
+                                                    {% endif %}
+                                                </small>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info" role="alert">
+                        📭 No security events logged yet. Try the vulnerable endpoints to generate some logs!
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Log Statistics</h5>
+            </div>
+            <div class="card-body">
+                <p class="mb-2"><strong>Total Events:</strong> {{ logs|length }}</p>
+                <div class="progress mb-3">
+                    <div class="progress-bar" role="progressbar" style="width: {{ (logs|length / 100)|default(0) * 100 }}%"></div>
+                </div>
+                <p class="text-muted small">Logs are stored in <code>logs/security.log</code></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Tips for Log Analysis</h5>
+            </div>
+            <div class="card-body">
+                <ul class="small mb-0">
+                    <li>Look for SQL keywords like UNION, SELECT, OR, AND</li>
+                    <li>Check for comment sequences (--), (/*), or (#)</li>
+                    <li>Monitor for database error messages</li>
+                    <li>Track unusual patterns in search or login attempts</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">⚠️ What to Look For</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>SQL Injection Indicators:</h6>
+                        <ul class="small">
+                            <li><code>' OR '1'='1</code> - Classic tautology</li>
+                            <li><code>'; DROP TABLE--</code> - Destructive attempt</li>
+                            <li><code>' UNION SELECT</code> - Data extraction</li>
+                            <li><code>admin'--</code> - Authentication bypass</li>
+                            <li><code>WAITFOR DELAY</code> - Time-based blind SQLi</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Normal Activity Patterns:</h6>
+                        <ul class="small">
+                            <li>Regular alphanumeric searches</li>
+                            <li>Valid authentication attempts</li>
+                            <li>Product name or description searches</li>
+                            <li>Proper login credentials</li>
+                            <li>No special SQL keywords in parameters</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

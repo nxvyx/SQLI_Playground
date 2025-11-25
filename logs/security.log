@@ -1,0 +1,18 @@
+2025-11-25 21:05:14 - 127.0.0.1 - test_event - Test query
+2025-11-25 21:05:31 - 127.0.0.1 - test_event - Test query
+2025-11-25 21:22:49 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='' OR '1'='1' AND password='any'
+2025-11-25 21:22:49 - 127.0.0.1 - login_failed - Failed login attempt for ' OR '1'='1
+2025-11-25 21:22:58 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='' OR '1'='1' AND password='' OR '1'='1'
+2025-11-25 21:22:58 - 127.0.0.1 - login_success - Successful login for ' OR '1'='1
+2025-11-25 21:23:11 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='' OR '1'='1' AND password='anything'
+2025-11-25 21:23:11 - 127.0.0.1 - login_failed - Failed login attempt for ' OR '1'='1
+2025-11-25 21:23:24 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='admin'--' AND password='abha'
+2025-11-25 21:23:24 - 127.0.0.1 - login_success - Successful login for admin'--
+2025-11-25 21:23:42 - 127.0.0.1 - secure_login_failed - Secure login failed for 1'or'1'='1
+2025-11-25 21:23:52 - 127.0.0.1 - secure_login_success - Secure login for user1
+2025-11-25 21:24:18 - 127.0.0.1 - search_attempt - SELECT * FROM products WHERE name LIKE '%' UNION SELECT --%' OR description LIKE '%' UNION SELECT --%'
+2025-11-25 21:24:18 - 127.0.0.1 - search_error - Search error: incomplete input
+2025-11-25 21:24:26 - 127.0.0.1 - search_attempt - SELECT * FROM products WHERE name LIKE '%' OR '1'='1%' OR description LIKE '%' OR '1'='1%'
+2025-11-25 21:24:39 - 127.0.0.1 - secure_search_success - Secure search for: ' OR '1'='1
+2025-11-25 21:39:08 - 127.0.0.1 - test_event - Test query
+2025-11-25 22:19:44 - 127.0.0.1 - test_event - Test query

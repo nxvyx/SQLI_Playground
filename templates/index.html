@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 text-center mb-4">
+        <h1 class="display-4">🔓 SQL Injection Playground</h1>
+        <p class="lead text-muted">Learn about SQL Injection vulnerabilities and how to prevent them in this interactive educational platform</p>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6 mb-3">
+        <div class="card vulnerable h-100">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">🔴 Vulnerable Login</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">A login form that is intentionally vulnerable to SQL Injection. Try to bypass authentication using SQL injection techniques.</p>
+                <p class="small text-muted mb-3"><strong>Try:</strong> <code>admin' OR '1'='1</code></p>
+                <a href="{{ url_for('login') }}" class="btn btn-danger">Explore Vulnerability →</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-3">
+        <div class="card secure h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">🔒 Secure Login</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">A secure login form that uses parameterized queries to prevent SQL Injection attacks. Try the same injection - it won't work!</p>
+                <p class="small text-muted mb-3"><strong>Try:</strong> <code>admin' OR '1'='1</code> (Safe to try!)</p>
+                <a href="{{ url_for('secure_login_route') }}" class="btn btn-success">Learn Defense →</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-3">
+        <div class="card vulnerable h-100">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">🔴 Vulnerable Search</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">A product search vulnerable to SQL Injection. Try to extract database information or bypass search logic.</p>
+                <p class="small text-muted mb-3"><strong>Try:</strong> <code>' OR '1'='1</code> or <code>' UNION SELECT</code></p>
+                <a href="{{ url_for('search') }}" class="btn btn-danger">Test Search →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <div class="card secure h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">🔒 Secure Search</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Secure product search using parameterized queries. Even advanced SQLi payloads won't bypass this protection.</p>
+                <p class="small text-muted mb-3"><strong>Why it's safe:</strong> Proper SQL parameterization</p>
+                <a href="{{ url_for('secure_search') }}" class="btn btn-success">See Defense →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">📚 About This Playground</h5>
+            </div>
+            <div class="card-body">
+                <p>This interactive platform is designed to demonstrate SQL Injection vulnerabilities and their prevention through practical examples. You'll learn:</p>
+                
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <h6>🎯 Learning Objectives</h6>
+                        <ul class="small">
+                            <li>How SQL Injection vulnerabilities occur</li>
+                            <li>Real-world attack patterns (UNION-based, blind, time-based)</li>
+                            <li>Why string concatenation is dangerous</li>
+                            <li>How parameterized queries prevent injection</li>
+                            <li>Defensive coding practices</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>🛠️ What's Included</h6>
+                        <ul class="small">
+                            <li>✓ Vulnerable & secure login forms</li>
+                            <li>✓ Vulnerable & secure search functionality</li>
+                            <li>✓ Real-time security logging</li>
+                            <li>✓ SQLi detection engine</li>
+                            <li>✓ Security dashboard & analysis</li>
+                            <li>✓ Comparative code examples</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning mt-3 mb-0">
+                    <strong>⚠️ EDUCATIONAL USE ONLY:</strong> This application is intentionally vulnerable and should only be used for learning purposes in a controlled, isolated environment. Never deploy similar code in production!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">🔍 Common SQLi Patterns to Try</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <small><code>' OR '1'='1</code><br><span class="text-muted">Classic tautology</span></small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <small><code>admin'--</code><br><span class="text-muted">Comment bypass</span></small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <small><code>' UNION SELECT</code><br><span class="text-muted">Data extraction</span></small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <small><code>' OR 1=1--</code><br><span class="text-muted">Alternative tautology</span></small>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">🛡️ Defense Mechanisms</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <strong>Parameterized Queries</strong>
+                        <small class="d-block text-muted">Use placeholders (?) instead of concatenation</small>
+                    </div>
+                    <div class="list-group-item">
+                        <strong>Input Validation</strong>
+                        <small class="d-block text-muted">Validate data type, length, and format</small>
+                    </div>
+                    <div class="list-group-item">
+                        <strong>Least Privilege</strong>
+                        <small class="d-block text-muted">Database users should have minimal permissions</small>
+                    </div>
+                    <div class="list-group-item">
+                        <strong>Error Handling</strong>
+                        <small class="d-block text-muted">Never expose database errors to users</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">📊 Monitoring & Logging</h5>
+            </div>
+            <div class="card-body">
+                <p>All activities are logged and analyzed for SQL injection patterns. Visit the logs page to see detected attempts.</p>
+                <a href="{{ url_for('view_logs') }}" class="btn btn-info btn-sm">
+                    📋 View Security Logs
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
