@@ -418,11 +418,12 @@ This project is intended for:
 
 ## 📝 License
 
-This educational project is provided as-is for learning purposes.
+MIT License. This educational project is provided as-is for learning purposes.
 
 ## 👨‍💻 Author
 
-Created as an educational SQL Injection Playground to demonstrate vulnerabilities and defenses.
+Navya Jain ( https://github.com/nxvyx )
+- Created as an educational SQL Injection Playground to demonstrate vulnerabilities and defenses.
 
 ---
 
@@ -501,3 +502,4 @@ pip install -r requirements.txt --force-reinstall
 ## Security Note
 
 This application is intentionally vulnerable to SQL injection for educational purposes. Do not deploy this application in a production environment or on a public network.
+
