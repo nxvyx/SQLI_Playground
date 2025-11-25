@@ -1,0 +1,24 @@
+2025-11-25 16:32:32 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='1'or'1'='1' AND password='haih'
+2025-11-25 16:32:32 - 127.0.0.1 - sql_error - SQL Error: no such table: users
+2025-11-25 16:32:53 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='1'or'1'='1' AND password='1'or'1'='1'
+2025-11-25 16:32:53 - 127.0.0.1 - sql_error - SQL Error: no such table: users
+2025-11-25 16:33:02 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='' OR '1'='1' AND password='' OR '1'='1'
+2025-11-25 16:33:02 - 127.0.0.1 - sql_error - SQL Error: no such table: users
+2025-11-25 16:33:15 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username=''or'1'='1' AND password=''or'1'='1'
+2025-11-25 16:33:15 - 127.0.0.1 - sql_error - SQL Error: no such table: users
+2025-11-25 16:37:30 - 127.0.0.1 - search_attempt - SELECT * FROM products WHERE name LIKE '%UNION SELECT id, username, password, NULL FROM users--%' OR description LIKE '%UNION SELECT id, username, password, NULL FROM users--%'
+2025-11-25 16:37:30 - 127.0.0.1 - search_error - Search error: no such table: products
+2025-11-25 16:37:38 - 127.0.0.1 - search_attempt - SELECT * FROM products WHERE name LIKE '%OR '1'='1%' OR description LIKE '%OR '1'='1%'
+2025-11-25 16:37:38 - 127.0.0.1 - search_error - Search error: near "1": syntax error
+2025-11-25 16:38:20 - 127.0.0.1 - secure_login_error - Secure login error: no such table: users
+2025-11-25 16:38:34 - 127.0.0.1 - secure_login_error - Secure login error: no such table: users
+2025-11-25 16:44:27 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='1'or'1'='1' AND password='pass'
+2025-11-25 16:44:27 - 127.0.0.1 - sql_error - SQL Error: no such table: users
+2025-11-25 16:44:37 - 127.0.0.1 - search_attempt - SELECT * FROM products WHERE name LIKE '%OR '1'='1%' OR description LIKE '%OR '1'='1%'
+2025-11-25 16:44:37 - 127.0.0.1 - search_error - Search error: near "1": syntax error
+2025-11-25 16:45:32 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='admin' AND password='admin123'
+2025-11-25 16:45:32 - 127.0.0.1 - sql_error - SQL Error: no such table: users
+2025-11-25 17:05:02 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='1'or'1'='1' AND password='yu'
+2025-11-25 17:05:02 - 127.0.0.1 - sql_error - SQL Error: no such table: users
+2025-11-25 17:05:12 - 127.0.0.1 - login_attempt - SELECT * FROM users WHERE username='admin' AND password='admin123'
+2025-11-25 17:05:12 - 127.0.0.1 - sql_error - SQL Error: no such table: users
