@@ -489,9 +489,6 @@ pip install -r requirements.txt --force-reinstall
    - Visit: http://localhost:5000/search
    - Try SQL injection: `' UNION SELECT id, username, password, NULL FROM users--`
 
-4. **Monitor Attacks**
-   - Visit: http://localhost:5001
-   - View real-time detection of SQL injection attempts
 
 ## Troubleshooting
 
@@ -502,4 +499,5 @@ pip install -r requirements.txt --force-reinstall
 ## Security Note
 
 This application is intentionally vulnerable to SQL injection for educational purposes. Do not deploy this application in a production environment or on a public network.
+
 
